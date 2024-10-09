@@ -60,52 +60,33 @@ const sections =[
         }
 ];
 
-export default function SectionsScreen() {
+const SectionScreen = () => {
   return (
     <SectionList
       sections={sections}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <View style={styles.articleContainer}>
+        <View style={styles.item}>
           <Image source={{ uri: item.image }} style={styles.image} />
           <View style={styles.textContainer}>
             <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.description}>{item.description}</Text>
+            <Text>{item.description}</Text>
           </View>
         </View>
       )}
-      renderSectionHeader={({ section }) => (
-        <Text style={styles.sectionHeader}>{section.title}</Text>
+      renderSectionHeader={({ section: { title } }) => (
+        <Text style={styles.header}>{title}</Text>
       )}
     />
   );
-}
+};
+
 
 const styles = StyleSheet.create({
-  sectionHeader: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    backgroundColor: '#f4f4f4',
-    padding: 10,
-  },
-  articleContainer: {
-    flexDirection: 'row',
-    margin: 10,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    marginRight: 10,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: 14,
-    color: 'gray',
-  },
+  item: { flexDirection: 'row', padding: 10, alignItems: 'center' },
+  image: { width: 100, height: 100, marginRight: 10 },
+  textContainer: { flex: 1 },
+  title: { fontWeight: 'bold', fontSize: 16 },
+  header: { fontWeight: 'bold', fontSize: 20, padding: 10, backgroundColor: '#f0f0f0' },
 });
+export default SectionScreen;

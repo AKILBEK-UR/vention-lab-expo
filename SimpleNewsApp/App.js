@@ -9,31 +9,22 @@ import ArticleScreen from './screens/ArticleScreen';
 const Stack = createNativeStackNavigator();
 const Tab = createBottomTabNavigator();
 
-function HomeStack() {
+function HomeTabs() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen name="Home" component={HomeScreen} />
-      <Stack.Screen name="Article" component={ArticleScreen} />
-    </Stack.Navigator>
-  );
-}
-
-function SectionsStack() {
-  return (
-    <Stack.Navigator>
-      <Stack.Screen name="Sections" component={SectionsScreen} />
-      <Stack.Screen name="Articles" component={ArticleScreen} />
-    </Stack.Navigator>
+    <Tab.Navigator>
+      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name="Sections" component={SectionsScreen} />
+    </Tab.Navigator>
   );
 }
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Tab.Navigator>
-        <Tab.Screen name="Homes" component={HomeStack} />
-        <Tab.Screen name="Section" component={SectionsStack} />
-      </Tab.Navigator>
+      <Stack.Navigator initialRouteName="HomeTabs">
+        <Stack.Screen name="HomeTabs" component={HomeTabs} options={{ headerShown: false }} />
+        <Stack.Screen name="Article" component={ArticleScreen} />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 }

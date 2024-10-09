@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, FlatList, Image, StyleSheet } from 'react-native';
+import { View, Text, FlatList, Image, StyleSheet, TouchableOpacity  } from 'react-native';
 
 const articles = [
         { 
@@ -34,43 +34,29 @@ const articles = [
         }
 ];
 
-export default function HomeScreen() {
+export default function HomeScreen({navigation}) {
   return (
     <FlatList
       data={articles}
       keyExtractor={(item) => item.id}
       renderItem={({ item }) => (
-        <View style={styles.articleContainer}>
-          <Image source={{ uri: item.image }} style={styles.image} />
-          <View style={styles.textContainer}>
-            <Text style={styles.title}>{item.title}</Text>
-            <Text style={styles.description}>{item.description}</Text>
+        <TouchableOpacity onPress={() => navigation.navigate('Article', { article: item })}>
+          <View style={styles.item}>
+            <Image source={{ uri: item.image }} style={styles.image} />
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text>{item.description}</Text>
+            </View>
           </View>
-        </View>
+        </TouchableOpacity>
       )}
     />
   );
 }
 
 const styles = StyleSheet.create({
-  articleContainer: {
-    flexDirection: 'row',
-    margin: 10,
-  },
-  image: {
-    width: 100,
-    height: 100,
-    marginRight: 10,
-  },
-  textContainer: {
-    flex: 1,
-  },
-  title: {
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  description: {
-    fontSize: 14,
-    color: 'gray',
-  },
+  item: { flexDirection: 'row', padding: 10, alignItems: 'center' },
+  image: { width: 100, height: 100, marginRight: 10 },
+  textContainer: { flex: 1 },
+  title: { fontWeight: 'bold', fontSize: 16 },
 });
